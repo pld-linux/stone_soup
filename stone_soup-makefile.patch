@@ -1,0 +1,54 @@
+diff -Nur stone_soup-0.4.1-src.ori/source/makefile.unix stone_soup-0.4.1-src/source/makefile.unix
+--- stone_soup-0.4.1-src.ori/source/makefile.unix	2008-07-20 13:40:44.689619433 +0200
++++ stone_soup-0.4.1-src/source/makefile.unix	2008-07-20 13:40:01.377123889 +0200
+@@ -44,6 +44,8 @@
+ # valid path before building Crawl. This is not necessary if you are building
+ # Crawl for a single user.
+ 
++SAVEDIR := /var/games/stone_soup/
++DATADIR := /usr/share/stone_soup/
+ # SAVEDIR := /usr/games/crawl/saves/
+ # DATADIR := /usr/games/crawl/data/
+ 
+@@ -227,29 +229,19 @@
+ ifeq ($(DATADIR),)
+ 	$(error DATADIR not set! Set DATADIR and run make clean install again)
+ endif
+-	[ -d $(INSTALLDIR) ] || mkdir -p $(INSTALLDIR)
+-	$(COPY) $(GAME) $(INSTALLDIR)
+-	chown $(INSTALL_UGRP) $(INSTALLDIR)/$(GAME)
+-	chmod ${MCHMOD} ${INSTALLDIR}/$(GAME)
+-	mkdir -p $(DATADIR)/dat
+-	mkdir -p $(DATADIR)/dat/lua
+-	mkdir -p $(DATADIR)/dat/clua
+-	mkdir -p $(DATADIR)/dat/descript
+-	mkdir -p $(DATADIR)/dat/database
+-	cp dat/*.des $(DATADIR)/dat
+-	cp dat/lua/*.lua $(DATADIR)/dat/lua
+-	cp dat/clua/*.lua $(DATADIR)/dat/clua
+-	cp dat/descript/*.txt $(DATADIR)/dat/descript
+-	cp dat/database/*.txt $(DATADIR)/dat/database
+-	mkdir -p $(DATADIR)/settings
+-	cp ../settings/* $(DATADIR)/settings/
+-	mkdir -p $(DATADIR)/docs
+-	cp ../docs/*.txt $(DATADIR)/docs
+-	chown -R $(INSTALL_UGRP) $(DATADIR)
++	install -d $(DESTDIR)/usr/bin
++	install $(GAME) $(DESTDIR)/usr/bin/stone_soup
++	install -d $(DESTDIR)$(DATADIR)dat
++	install -d $(DESTDIR)$(DATADIR)dat/{lua,clua,descript,database}
++	install dat/*.des $(DESTDIR)$(DATADIR)dat/
++	install dat/lua/*.lua $(DESTDIR)$(DATADIR)dat/lua/
++	install dat/clua/*.lua $(DESTDIR)$(DATADIR)dat/clua/
++	install dat/descript/*.txt $(DESTDIR)$(DATADIR)dat/descript/
++	install dat/database/*.txt $(DESTDIR)$(DATADIR)dat/database/
++	install -d $(DESTDIR)$(DATADIR)settings
++	install ../settings/* $(DESTDIR)$(DATADIR)settings/
+ ifneq ($(SAVEDIR),)
+-	mkdir -p $(SAVEDIR)
+-	chown $(INSTALL_UGRP) $(SAVEDIR)
+-	chmod $(MCHMOD_SAVEDIR) $(SAVEDIR)
++	install -d $(DESTDIR)$(SAVEDIR)
+ endif
+ 
+ clean:

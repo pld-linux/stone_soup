@@ -16,7 +16,7 @@
  endif
  
 -LIB = -l$(LIBCURS) -L$(LUASRC) -l$(LUALIB) $(LIBDBM)
-+LIB = -l$(LIBCURS) -L/usr/lib -l$(LUALIB) $(LIBDBM)
++LIB = -l$(LIBCURS) -l$(LUALIB) $(LIBDBM)
  
  INCLUDES := $(INCLUDES) -Iutil -I. -I$(LUASRC) $(EXTRA_INCLUDES)
  

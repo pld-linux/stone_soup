@@ -1,16 +1,17 @@
-diff -Nur stone_soup-0.4.1-src.ori/source/makefile.unix stone_soup-0.4.1-src/source/makefile.unix
---- stone_soup-0.4.1-src.ori/source/makefile.unix	2008-07-20 13:40:44.689619433 +0200
-+++ stone_soup-0.4.1-src/source/makefile.unix	2008-07-20 13:40:01.377123889 +0200
-@@ -44,6 +44,8 @@
+--- stone_soup-0.5.1-src/source/makefile.unix~	2009-08-12 14:31:32.000000000 +0200
++++ stone_soup-0.5.1-src/source/makefile.unix	2009-08-12 14:31:39.000000000 +0200
+@@ -47,8 +47,8 @@
  # valid path before building Crawl. This is not necessary if you are building
  # Crawl for a single user.
  
+-# SAVEDIR := /usr/games/crawl/saves/
+-# DATADIR := /usr/games/crawl/data/
 +SAVEDIR := /var/games/stone_soup/
 +DATADIR := /usr/share/stone_soup/
- # SAVEDIR := /usr/games/crawl/saves/
- # DATADIR := /usr/games/crawl/data/
  
-@@ -227,29 +229,19 @@
+ LEX  := flex
+ YACC := bison -y
+@@ -207,29 +207,19 @@
  ifeq ($(DATADIR),)
  	$(error DATADIR not set! Set DATADIR and run make clean install again)
  endif
@@ -23,15 +24,15 @@ diff -Nur stone_soup-0.4.1-src.ori/source/makefile.unix stone_soup-0.4.1-src/sou
 -	mkdir -p $(DATADIR)/dat/clua
 -	mkdir -p $(DATADIR)/dat/descript
 -	mkdir -p $(DATADIR)/dat/database
--	cp dat/*.des $(DATADIR)/dat
--	cp dat/lua/*.lua $(DATADIR)/dat/lua
--	cp dat/clua/*.lua $(DATADIR)/dat/clua
--	cp dat/descript/*.txt $(DATADIR)/dat/descript
--	cp dat/database/*.txt $(DATADIR)/dat/database
+-	$(COPY) dat/*.des $(DATADIR)/dat
+-	$(COPY) dat/lua/*.lua $(DATADIR)/dat/lua
+-	$(COPY) dat/clua/*.lua $(DATADIR)/dat/clua
+-	$(COPY) dat/descript/*.txt $(DATADIR)/dat/descript
+-	$(COPY) dat/database/*.txt $(DATADIR)/dat/database
 -	mkdir -p $(DATADIR)/settings
--	cp ../settings/* $(DATADIR)/settings/
+-	$(COPY) ../settings/* $(DATADIR)/settings/
 -	mkdir -p $(DATADIR)/docs
--	cp ../docs/*.txt $(DATADIR)/docs
+-	$(COPY) ../docs/*.txt $(DATADIR)/docs
 -	chown -R $(INSTALL_UGRP) $(DATADIR)
 +	install -d $(DESTDIR)/usr/bin
 +	install $(GAME) $(DESTDIR)/usr/bin/stone_soup

@@ -1,0 +1,48 @@
+--- stone_soup-0.5.1-src/source/makefile.unix~	2009-08-12 15:36:43.000000000 +0200
++++ stone_soup-0.5.1-src/source/makefile.unix	2009-08-12 15:38:49.000000000 +0200
+@@ -77,7 +77,7 @@
+ ifneq ($(HURRY),y)
+ ifneq ($(DEBUG_CRAWL),y)
+ CFWARN += -Wuninitialized
+-CFOTHERS += -O2
++CFOTHERS +=
+ endif
+ endif
+ 
+@@ -160,7 +160,7 @@
+ 	rm -f $(DEPENDENCY_MKF).tmp
+ 	@for i in $^; do \
+ 	    echo "Updating dependencies for $$i"; \
+-	    $(CXX) -MM $(CFLAGS) $$i >>$(DEPENDENCY_MKF).tmp 2>/dev/null; \
++	    $(CXX) -MM $(OPTFLAGS) $(CFLAGS) $$i >>$(DEPENDENCY_MKF).tmp 2>/dev/null; \
+ 	done
+ 	mv -f $(DEPENDENCY_MKF).tmp $(DEPENDENCY_MKF)
+ 
+@@ -247,23 +247,23 @@
+ 	$(DELETE) $(DEPENDENCY_MKF)
+ 
+ $(GAME): $(GAME_DEPENDS)
+-	${CXX} ${LDFLAGS} $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
++	${CXX} ${LDFLAGS} $(OPTFLAGS) $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
+ 
+ .PHONY : debug
+ 
+ debug: $(GAME)
+ 
+ profile: $(GAME_DEPENDS)
+-	${CXX} -g -p ${LDFLAGS} $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
++	${CXX} -g -p ${LDFLAGS} $(OPTFLAGS) $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
+ 
+ .cc.o:
+-	${CXX} ${CFLAGS} -c $<
++	${CXX} $(OPTFLAGS) ${CFLAGS} -c $<
+ 
+ # [ds] Note we don't use the standard CFLAGS here; that's intentional, most
+ # flex/bison combos I've tried don't produce code that passes the warnings
+ # test.
+ $(UTIL)%.o: $(UTIL)%.cc
+-	$(CXX) $(YCFLAGS) -o $@ -c $<
++	$(CXX) $(OPTFLAGS) $(YCFLAGS) -o $@ -c $<
+ 
+ #############################################################################
+ # Build Lua

@@ -6,28 +6,23 @@
 #
 Summary:	stone soup :: crawl clone
 Name:		stone_soup
-Version:	0.4.1
+Version:	0.5.1
 Release:	0.1
 License:	Nethack Like
 Group:		Applications
 Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}-src.tbz2
-# Source0-md5:	9df29d976edd96018fdb7eb0a70a7ba8
+# Source0-md5:	e1feb17d161311825e5eb676c14be44a
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
 #Source1:	-
 # Source1-md5:	-
 #Patch0:		%{name}-DESTDIR.patch
 URL:		-
-#BuildRequires:	-
-#BuildRequires:	autoconf
-#BuildRequires:	automake
-#BuildRequires:	intltool
 BuildRequires:	bison
-BuildRequires:	flex
 BuildRequires:	byacc
-#Requires(postun):	-
-#Requires(pre,post):	-
-#Requires(preun):	-
+BuildRequires:	flex
+BuildRequires:	lusa51-devel
+BuildRequires:	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

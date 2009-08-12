@@ -1,6 +1,6 @@
---- stone_soup-0.4.1-src/source/makefile.unix	2008-07-18 01:35:53.000000000 +0200
-+++ stone_soup-0.4.1-src/source/makefile.unix.mod	2008-07-19 12:15:36.968770818 +0200
-@@ -50,8 +50,8 @@
+--- stone_soup-0.5.1-src/source/makefile.unix~	2009-08-12 15:50:27.000000000 +0200
++++ stone_soup-0.5.1-src/source/makefile.unix	2009-08-12 15:50:06.000000000 +0200
+@@ -53,8 +53,8 @@
  LEX  := flex
  YACC := bison -y
  
@@ -10,17 +10,17 @@
 +LUALIB = lua51
  LUALIBA = l$(LUALIB).a
  
- DBH_FILE  := /usr/include/db.h
-@@ -85,7 +85,7 @@
+ SQLSRC   := util/sqlite
+@@ -66,7 +66,7 @@
+ EXTRA_INCLUDES += -I$(SQLSRC)
  EXTRA_DEPENDS  += $(FSQLLIBA)
- endif
  
 -LIB = -l$(LIBCURS) -L$(LUASRC) -l$(LUALIB) $(LIBDBM)
 +LIB = -l$(LIBCURS) -l$(LUALIB) $(LIBDBM)
  
  INCLUDES := $(INCLUDES) -Iutil -I. -I$(LUASRC) $(EXTRA_INCLUDES)
  
-@@ -156,7 +156,7 @@
+@@ -135,7 +135,7 @@
  DOYACC :=
  endif
  
@@ -29,3 +29,16 @@
  SRC_PKG_BASE := stone_soup
  SRC_VERSION  := $(shell egrep 'VER_NUM  *".*"' version.h | \
  			egrep -o '[0-9]\.[0-9](\.[0-9])?')
+@@ -278,9 +278,9 @@
+ #############################################################################
+ # Build Lua
+ 
+-$(LUASRC)$(LUALIBA):
+-	echo Building Lua...
+-	cd $(LUASRC) && $(MAKE) crawl_unix
++#$(LUASRC)$(LUALIBA):
++#	echo Building Lua...
++#	cd $(LUASRC) && $(MAKE) crawl_unix
+ 
+ #############################################################################
+ # Build SQLite

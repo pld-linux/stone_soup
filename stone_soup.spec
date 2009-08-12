@@ -16,6 +16,7 @@ BuildRequires:	byacc
 BuildRequires:	flex
 BuildRequires:	lua51-devel
 BuildRequires:	ncurses-devel
+BuildRequires:	sqlite3-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

@@ -8,11 +8,13 @@ Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}-src.tbz2
 # Source0-md5:	e1feb17d161311825e5eb676c14be44a
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
+Patch2:		%{name}-systemsqlite3.patch
+Patch3:		%{name}-cflags.patch
 URL:		http://crawl-ref.sourceforge.net/
 BuildRequires:	bison
 BuildRequires:	byacc
 BuildRequires:	flex
-BuildRequires:	lusa51-devel
+BuildRequires:	lua51-devel
 BuildRequires:	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -21,15 +23,16 @@ Dungeon Crawl Clone.
 
 %prep
 %setup -q -n %{name}-%{version}-src
-%patch0 -p1 
-%patch1 -p1 
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
-%{__make} -C source 
-
-#%{__make} \
-#	CFLAGS="%{rpmcflags}" \
-#	LDFLAGS="%{rpmldflags}"
+%{__make} -C source \
+	CXX="%{__cxx}" \
+	OPTFLAGS="%{rpmcxxflags}" \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT

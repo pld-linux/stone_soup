@@ -51,19 +51,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CREDITS.txt README.* docs
 %attr(2755,root,games) %{_bindir}/stone_soup
-%attr(3777,root,games) %dir %{_datadir}/stone_soup
-%attr(2775,root,games) %dir %{_datadir}/stone_soup/db
-%attr(2775,root,games) %dir %{_datadir}/stone_soup/des
-%attr(775,root,games) %dir %{_datadir}/stone_soup/dat
-%attr(775,root,games) %dir %{_datadir}/stone_soup/dat/clua
-%attr(775,root,games) %dir %{_datadir}/stone_soup/dat/lua
-%attr(775,root,games) %dir %{_datadir}/stone_soup/dat/descript
-%attr(775,root,games) %dir %{_datadir}/stone_soup/dat/database
-%attr(775,root,games) %dir %{_datadir}/stone_soup/settings
-%attr(3777,root,games) %dir %{_localstatedir}/games/stone_soup
-%attr(644,root,games) %{_datadir}/stone_soup/dat/*des
-%attr(644,root,games) %{_datadir}/stone_soup/dat/clua/*lua
-%attr(644,root,games) %{_datadir}/stone_soup/dat/lua/*lua
-%attr(644,root,games) %{_datadir}/stone_soup/dat/descript/*.txt
-%attr(644,root,games) %{_datadir}/stone_soup/dat/database/*.txt
-%attr(644,root,games) %{_datadir}/stone_soup/settings/*.txt
+%{_datadir}/stone_soup
+%attr(775,root,games) %dir /var/games/stone_soup

@@ -2,7 +2,7 @@ Summary:	stone soup :: crawl clone
 Summary(pl.UTF-8):	stone soup :: klon crawla
 Name:		stone_soup
 Version:	0.5.1
-Release:	0.1
+Release:	1
 License:	Nethack Like
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}-src.tbz2

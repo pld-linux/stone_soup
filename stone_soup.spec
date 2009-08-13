@@ -1,4 +1,5 @@
 Summary:	stone soup :: crawl clone
+Summary(pl.UTF-8):	stone soup :: klon crawla
 Name:		stone_soup
 Version:	0.5.1
 Release:	0.1
@@ -20,7 +21,22 @@ BuildRequires:	sqlite3-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Dungeon Crawl Clone.
+Dungeon Crawl Stone Soup is a fun, free rogue-like game of exploration
+and treasure-hunting in dungeons filled with dangerous and unfriendly
+monsters in a quest for the mystifyingly fabulous Orb of Zot.
+
+Dungeon Crawl Stone Soup is a variant of Linley's Dungeon Crawl that's
+openly developed and invites participation from the Crawl community.
+
+%description -l pl.UTF-8
+Dungeon Crawl Stone Soup jest zabawną darmową grą typu roguelike, w
+której gracz zwiedza świat poszukując skarbów w lochach pełnyh
+niebezpiecznych i nieprzyjaznych potworów w celu odnalezienia
+tajemniczej baśniowej Kuli Zota.
+
+Dungeon Crawl Stone Soup jest wariantem gry Dungeon Crawl stworzonej
+przez Linleya. Jest on otwarcie rozwijany również przez
+społeczeństwo Crawla.
 
 %prep
 %setup -q -n %{name}-%{version}-src

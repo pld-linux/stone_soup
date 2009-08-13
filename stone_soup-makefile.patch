@@ -1,17 +1,24 @@
---- stone_soup-0.5.1-src/source/makefile.unix~	2009-08-12 14:31:32.000000000 +0200
-+++ stone_soup-0.5.1-src/source/makefile.unix	2009-08-12 14:31:39.000000000 +0200
-@@ -47,8 +47,8 @@
+--- stone_soup-0.5.1-src/source/makefile.unix~	2009-08-13 11:11:24.000000000 +0200
++++ stone_soup-0.5.1-src/source/makefile.unix	2009-08-13 11:14:40.000000000 +0200
+@@ -41,14 +41,14 @@
+ # The user:group to install the game as.
+ INSTALL_UGRP := games:games
+ 
+-INSTALLDIR   := /usr/games/crawl
++INSTALLDIR   := /usr/bin
+ 
+ # If you're installing Crawl for multiple users, you *must* set this to a
  # valid path before building Crawl. This is not necessary if you are building
  # Crawl for a single user.
  
 -# SAVEDIR := /usr/games/crawl/saves/
 -# DATADIR := /usr/games/crawl/data/
-+SAVEDIR := /var/games/stone_soup/
-+DATADIR := /usr/share/stone_soup/
++SAVEDIR := /var/games/stone_soup
++DATADIR := /usr/share/stone_soup
  
  LEX  := flex
  YACC := bison -y
-@@ -207,29 +207,19 @@
+@@ -207,29 +207,22 @@
  ifeq ($(DATADIR),)
  	$(error DATADIR not set! Set DATADIR and run make clean install again)
  endif
@@ -34,22 +41,25 @@
 -	mkdir -p $(DATADIR)/docs
 -	$(COPY) ../docs/*.txt $(DATADIR)/docs
 -	chown -R $(INSTALL_UGRP) $(DATADIR)
-+	install -d $(DESTDIR)/usr/bin
-+	install $(GAME) $(DESTDIR)/usr/bin/stone_soup
-+	install -d $(DESTDIR)$(DATADIR)dat
-+	install -d $(DESTDIR)$(DATADIR)dat/{lua,clua,descript,database}
-+	install dat/*.des $(DESTDIR)$(DATADIR)dat/
-+	install dat/lua/*.lua $(DESTDIR)$(DATADIR)dat/lua/
-+	install dat/clua/*.lua $(DESTDIR)$(DATADIR)dat/clua/
-+	install dat/descript/*.txt $(DESTDIR)$(DATADIR)dat/descript/
-+	install dat/database/*.txt $(DESTDIR)$(DATADIR)dat/database/
-+	install -d $(DESTDIR)$(DATADIR)settings
-+	install ../settings/* $(DESTDIR)$(DATADIR)settings/
++	[ -d $(DESTDIR)$(INSTALLDIR) ] || mkdir -p $(DESTDIR)$(INSTALLDIR)
++	$(COPY) $(GAME) $(DESTDIR)$(INSTALLDIR)/stone_soup
++	mkdir -p $(DESTDIR)$(DATADIR)/dat
++	mkdir -p $(DESTDIR)$(DATADIR)/dat/lua
++	mkdir -p $(DESTDIR)$(DATADIR)/dat/clua
++	mkdir -p $(DESTDIR)$(DATADIR)/dat/descript
++	mkdir -p $(DESTDIR)$(DATADIR)/dat/database
++	$(COPY) dat/*.des $(DESTDIR)$(DATADIR)/dat
++	$(COPY) dat/lua/*.lua $(DESTDIR)$(DATADIR)/dat/lua
++	$(COPY) dat/clua/*.lua $(DESTDIR)$(DATADIR)/dat/clua
++	$(COPY) dat/descript/*.txt $(DESTDIR)$(DATADIR)/dat/descript
++	$(COPY) dat/database/*.txt $(DESTDIR)$(DATADIR)/dat/database
++	mkdir -p $(DESTDIR)$(DATADIR)/settings
++	$(COPY) ../settings/* $(DESTDIR)$(DATADIR)/settings/
  ifneq ($(SAVEDIR),)
 -	mkdir -p $(SAVEDIR)
 -	chown $(INSTALL_UGRP) $(SAVEDIR)
 -	chmod $(MCHMOD_SAVEDIR) $(SAVEDIR)
-+	install -d $(DESTDIR)$(SAVEDIR)
++	mkdir -p $(DESTDIR)$(SAVEDIR)
  endif
  
  clean:

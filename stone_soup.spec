@@ -54,9 +54,6 @@ społeczeństwo Crawla.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_datadir}/stone_soup{,/db,/des}
-install -d $RPM_BUILD_ROOT%{_localstatedir}/games/stone_soup
-
 %{__make} -C source install \
 	DESTDIR=$RPM_BUILD_ROOT
 

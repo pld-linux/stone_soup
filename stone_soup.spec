@@ -30,7 +30,7 @@ openly developed and invites participation from the Crawl community.
 
 %description -l pl.UTF-8
 Dungeon Crawl Stone Soup jest zabawną darmową grą typu roguelike, w
-której gracz zwiedza świat poszukując skarbów w lochach pełnyh
+której gracz zwiedza świat poszukując skarbów w lochach pełnych
 niebezpiecznych i nieprzyjaznych potworów w celu odnalezienia
 tajemniczej baśniowej Kuli Zota.
 

@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tiles		# build tiles version
+#
 Summary:	stone soup :: crawl clone
 Summary(pl.UTF-8):	stone soup :: klon crawla
 Name:		stone_soup
@@ -11,12 +15,20 @@ Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-systemsqlite3.patch
 Patch3:		%{name}-cflags.patch
+Patch4:		%{name}-tiles.patch
 URL:		http://crawl-ref.sourceforge.net/
+%if %{with tiles}
+BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	OpenGL-devel
+%endif
+%{?with_tiles:BuildRequires:	SDL_image-devel}
 BuildRequires:	bison
 BuildRequires:	byacc
 BuildRequires:	flex
+%{?with_tiles:BuildRequires:	freetype-devel}
+%{?with_tiles:BuildRequires:	libpng-devel}
 BuildRequires:	lua51-devel
-BuildRequires:	ncurses-devel
+%{!?with_tiles:BuildRequires:	ncurses-devel}
 BuildRequires:	sqlite3-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,9 +56,13 @@ społeczeństwo Crawla.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%if %{with tiles}
+%patch4 -p1
+%endif
 
 %build
 %{__make} -C source \
+	%{?with_tiles:MAKEFILE=makefile_tiles.unix} \
 	CXX="%{__cxx}" \
 	OPTFLAGS="%{rpmcxxflags}" \
 	LDFLAGS="%{rpmldflags}"
@@ -55,6 +71,7 @@ społeczeństwo Crawla.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C source install \
+	%{?with_tiles:MAKEFILE=makefile_tiles.unix} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean

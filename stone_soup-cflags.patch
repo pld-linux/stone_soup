@@ -46,3 +46,56 @@
  
  #############################################################################
  # Build Lua
+--- stone_soup-0.5.1-src/source/makefile_tiles.unix~	2009-08-13 16:54:03.000000000 +0200
++++ stone_soup-0.5.1-src/source/makefile_tiles.unix	2009-08-13 16:56:59.000000000 +0200
+@@ -112,7 +112,7 @@
+ ifneq ($(HURRY),y)
+ ifneq ($(DEBUG_CRAWL),y)
+ CFWARN += -Wuninitialized
+-CFOTHERS += -O2
++CFOTHERS +=
+ endif
+ endif
+ 
+@@ -167,7 +167,7 @@
+ 	rm -f $(DEPENDENCY_MKF).tmp
+ 	@for i in $^; do \
+ 	    echo "Updating dependencies for $$i"; \
+-	    $(CXX) -MM $(CFLAGS) $$i >>$(DEPENDENCY_MKF).tmp 2>/dev/null; \
++	    $(CXX) -MM $(OPTFLAGS) $(CFLAGS) $$i >>$(DEPENDENCY_MKF).tmp 2>/dev/null; \
+ 	done
+ 	mv -f $(DEPENDENCY_MKF).tmp $(DEPENDENCY_MKF)
+ 
+@@ -280,27 +280,27 @@
+ 	$(DELETE) $(DEPENDENCY_MKF)
+ 
+ $(GAME): $(GAME_DEPENDS)
+-	${CXX} ${LDFLAGS} $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
++	${CXX} ${LDFLAGS} $(OPTFLAGS) $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
+ 
+ .PHONY : debug
+ 
+ debug: $(GAME)
+ 
+ profile: $(GAME_DEPENDS)
+-	${CXX} -g -p ${LDFLAGS} $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
++	${CXX} -g -p ${LDFLAGS} $(OPTFLAGS) $(CFLAGS) $(OBJECTS) -o $(GAME) $(LIB)
+ 
+ %.o: %.cc $(TILEDEFHDRS)
+-	${CXX} ${CFLAGS} -c $< -o $@
++	${CXX} $(OPTFLAGS) ${CFLAGS} -c $< -o $@
+ 
+ # STL is bad in debug.  Always compile this file with optimizations.
+ tilebuf.o: tilebuf.cc $(TILEDEFHDRS)
+-	${CXX} ${CFLAGS} -O2 -c $< -o $@
++	${CXX} $(OPTFLAGS) ${CFLAGS} -O2 -c $< -o $@
+ 
+ # [ds] Note we don't use the standard CFLAGS here; that's intentional, most
+ # flex/bison combos I've tried don't produce code that passes the warnings
+ # test.
+ $(UTIL)%.o: $(UTIL)%.cc $(TILEDEFHDRS)
+-	$(CXX) $(YCFLAGS) -o $@ -c $<
++	$(CXX) $(OPTFLAGS) $(YCFLAGS) -o $@ -c $<
+ 
+ #############################################################################
+ # Build Lua

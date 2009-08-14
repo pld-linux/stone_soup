@@ -32,3 +32,37 @@
  
  #############################################################################
  # Packaging a source tarball for release
+--- stone_soup-0.5.1-src/source/makefile_tiles.unix~	2009-08-13 16:51:54.000000000 +0200
++++ stone_soup-0.5.1-src/source/makefile_tiles.unix	2009-08-13 16:53:26.000000000 +0200
+@@ -72,14 +72,14 @@
+ LUALIB = lua51
+ LUALIBA = l$(LUALIB).a
+ 
+-SQLSRC   := util/sqlite
++SQLSRC   := /usr/include
+ SQLLIB   := sqlite3
+ SQLLIBA  := lib$(SQLLIB).a
+ FSQLLIBA := $(SQLSRC)/$(SQLLIBA)
+ 
+-LIBDBM         := -L$(SQLSRC) -l$(SQLLIB)
+-EXTRA_INCLUDES += -I$(SQLSRC)
+-EXTRA_DEPENDS  += $(FSQLLIBA)
++LIBDBM         := -l$(SQLLIB)
++EXTRA_INCLUDES +=
++EXTRA_DEPENDS  +=
+ 
+ RLTILES = rltiles
+ 
+@@ -312,9 +312,9 @@
+ #############################################################################
+ # Build SQLite
+ 
+-$(FSQLLIBA):
+-	echo Building SQLite
+-	cd $(SQLSRC) && $(MAKE)
++#$(FSQLLIBA):
++#	echo Building SQLite
++#	cd $(SQLSRC) && $(MAKE)
+ 
+ #############################################################################
+ # Packaging a source tarball for release

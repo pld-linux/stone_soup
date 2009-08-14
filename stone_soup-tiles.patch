@@ -1,0 +1,12 @@
+--- stone_soup-0.5.1-src/source/rltiles/makefile.unix~	2009-07-29 01:57:26.000000000 +0200
++++ stone_soup-0.5.1-src/source/rltiles/makefile.unix	2009-08-13 17:12:16.000000000 +0200
+@@ -39,7 +39,7 @@
+ distclean: clean
+ 
+ .cc.o:
+-	${CXX} ${CFLAGS} -c $< -o $@
++	${CXX} $(OPTFLAGS) ${CFLAGS} -c $< -o $@
+ 
+ $(TILEGEN): $(OBJECTS)
+-	${CXX} ${LDFLAGS} $(OBJECTS) -o $@
++	${CXX} ${LDFLAGS} $(OPTFLAGS) $(OBJECTS) -o $@ -lpng -lSDL_image

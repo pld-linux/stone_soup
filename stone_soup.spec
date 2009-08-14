@@ -8,7 +8,7 @@ Name:		stone_soup
 Version:	0.5.1
 Release:	1
 License:	Nethack Like
-Group:		Applications/Games
+Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}-src.tbz2
 # Source0-md5:	e1feb17d161311825e5eb676c14be44a
 Patch0:		%{name}-systemlua.patch

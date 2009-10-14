@@ -10,3 +10,15 @@
  $(TILEGEN): $(OBJECTS)
 -	${CXX} ${LDFLAGS} $(OBJECTS) -o $@
 +	${CXX} ${LDFLAGS} $(OPTFLAGS) $(OBJECTS) -o $@ -lpng -lSDL_image
+--- stone_soup-0.5.2-src/source/tilesdl.cc~	2009-10-06 18:44:04.000000000 +0000
++++ stone_soup-0.5.2-src/source/tilesdl.cc	2009-10-14 13:56:19.000000000 +0000
+@@ -240,9 +240,6 @@
+ 
+     SDL_WM_SetCaption(CRAWL " " VERSION, CRAWL);
+     const char *icon_name =
+-#ifdef DATA_DIR_PATH
+-            DATA_DIR_PATH
+-#endif
+ #ifdef WIN32TILES
+             "dat/tiles/stone_soup_icon-win32.png";
+ #else

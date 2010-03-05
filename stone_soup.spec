@@ -16,7 +16,7 @@ Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-systemsqlite3.patch
 Patch3:		%{name}-cflags.patch
 Patch4:		%{name}-tiles.patch
-URL:		http://crawl-ref.sourceforge.net/
+URL:		http://crawl.develz.org/
 %if %{with tiles}
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel

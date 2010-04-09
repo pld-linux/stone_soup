@@ -53,7 +53,7 @@ społeczeństwo Crawla.
 %prep
 %setup -q
 #%%patch0 -p1
-#%%patch1 -p1
+%patch1 -p1
 #%%patch2 -p1
 #%%patch3 -p1
 %if %{with tiles}
@@ -61,12 +61,12 @@ społeczeństwo Crawla.
 %endif
 
 %build
-#cd source
 %{__make} -C source \
 	prefix="%{_prefix}" \
 	SAVEDIR="/var/games/stone_soup/" \
 	DATADIR="/usr/share/stone_soup/" \
 	%{?with_tiles:TILES="y"} \
+	V="y" \
 	CXX="%{__cxx}" \
 	OPTFLAGS="%{rpmcxxflags}" \
 	LDFLAGS="%{rpmldflags}"
@@ -74,12 +74,13 @@ społeczeństwo Crawla.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-#cd source
 %{__make} -C source install \
 	prefix="%{_prefix}" \
 	bin_prefix="bin" \
 	SAVEDIR="/var/games/stone_soup/" \
 	DATADIR="/usr/share/stone_soup/" \
+	%{?with_tiles:TILES="y"} \
+	V="y" \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -88,7 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CREDITS.txt README.* docs
-#%%attr(2755,root,games) %{_bindir}/stone_soup
-%attr(2755,root,games) %{_bindir}/crawl
+%attr(2755,root,games) %{_bindir}/stone_soup
 %{_datadir}/stone_soup
 %attr(775,root,games) %dir /var/games/stone_soup

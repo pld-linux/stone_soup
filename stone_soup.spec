@@ -1,16 +1,16 @@
 #
 # Conditional build:
-%bcond_without	tiles		# build tiles version
+%bcond_with	tiles		# build tiles version
 #
 Summary:	stone soup :: crawl clone
 Summary(pl.UTF-8):	stone soup :: klon crawla
 Name:		stone_soup
-Version:	0.5.2
+Version:	0.6.0
 Release:	1
 License:	Nethack Like
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}-src.tbz2
-# Source0-md5:	48aca99f320b70c880363ddaca7da89a
+Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
+# Source0-md5:	f4ff3e148344fda6410933d35deb4ead
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-systemsqlite3.patch
@@ -51,18 +51,22 @@ przez Linleya. Jest on otwarcie rozwijany również przez
 społeczeństwo Crawla.
 
 %prep
-%setup -q -n %{name}-%{version}-src
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%setup -q
+#%%patch0 -p1
+#%%patch1 -p1
+#%%patch2 -p1
+#%%patch3 -p1
 %if %{with tiles}
-%patch4 -p1
+#%%patch4 -p1
 %endif
 
 %build
+#cd source
 %{__make} -C source \
-	%{?with_tiles:MAKEFILE=makefile_tiles.unix} \
+	prefix="%{_prefix}" \
+	SAVEDIR="/var/games/stone_soup/" \
+	DATADIR="/usr/share/stone_soup/" \
+	%{?with_tiles:TILES="y"} \
 	CXX="%{__cxx}" \
 	OPTFLAGS="%{rpmcxxflags}" \
 	LDFLAGS="%{rpmldflags}"
@@ -70,8 +74,12 @@ społeczeństwo Crawla.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+#cd source
 %{__make} -C source install \
-	%{?with_tiles:MAKEFILE=makefile_tiles.unix} \
+	prefix="%{_prefix}" \
+	bin_prefix="bin" \
+	SAVEDIR="/var/games/stone_soup/" \
+	DATADIR="/usr/share/stone_soup/" \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -80,6 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CREDITS.txt README.* docs
-%attr(2755,root,games) %{_bindir}/stone_soup
+#%%attr(2755,root,games) %{_bindir}/stone_soup
+%attr(2755,root,games) %{_bindir}/crawl
 %{_datadir}/stone_soup
 %attr(775,root,games) %dir /var/games/stone_soup

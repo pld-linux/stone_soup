@@ -9,7 +9,7 @@ Version:	0.6.0
 Release:	1
 License:	Nethack Like
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
 # Source0-md5:	f4ff3e148344fda6410933d35deb4ead
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
@@ -47,8 +47,8 @@ niebezpiecznych i nieprzyjaznych potworów w celu odnalezienia
 tajemniczej baśniowej Kuli Zota.
 
 Dungeon Crawl Stone Soup jest wariantem gry Dungeon Crawl stworzonej
-przez Linleya. Jest on otwarcie rozwijany również przez
-społeczeństwo Crawla.
+przez Linleya. Jest on otwarcie rozwijany również przez społeczeństwo
+Crawla.
 
 %prep
 %setup -q
@@ -64,7 +64,7 @@ społeczeństwo Crawla.
 %{__make} -C source \
 	prefix="%{_prefix}" \
 	SAVEDIR="/var/games/stone_soup/" \
-	DATADIR="/usr/share/stone_soup/" \
+	DATADIR="%{_datadir}/stone_soup/" \
 	%{?with_tiles:TILES="y"} \
 	V="y" \
 	CXX="%{__cxx}" \
@@ -78,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 	prefix="%{_prefix}" \
 	bin_prefix="bin" \
 	SAVEDIR="/var/games/stone_soup/" \
-	DATADIR="/usr/share/stone_soup/" \
+	DATADIR="%{_datadir}/stone_soup/" \
 	%{?with_tiles:TILES="y"} \
 	V="y" \
 	DESTDIR=$RPM_BUILD_ROOT

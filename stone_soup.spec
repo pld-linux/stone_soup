@@ -13,8 +13,7 @@ Source0:	http://downloads.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
 # Source0-md5:	f4ff3e148344fda6410933d35deb4ead
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
-Patch2:		%{name}-systemsqlite3.patch
-Patch4:		%{name}-tiles.patch
+Patch3:		%{name}-tiles.patch
 URL:		http://crawl.develz.org/
 %if %{with tiles}
 BuildRequires:	OpenGL-GLU-devel
@@ -53,9 +52,8 @@ Crawla.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#%%patch2 -p1
 %if %{with tiles}
-#%%patch4 -p1
+#%%patch3 -p1
 %endif
 
 %build

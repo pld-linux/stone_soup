@@ -1,134 +1,34 @@
---- stone_soup-0.5.1-src/source/makefile.unix~	2009-08-13 11:11:24.000000000 +0200
-+++ stone_soup-0.5.1-src/source/makefile.unix	2009-08-13 11:14:40.000000000 +0200
-@@ -41,14 +41,14 @@
- # The user:group to install the game as.
- INSTALL_UGRP := games:games
+--- stone_soup-0.6.0/source/makefile~	2010-03-27 00:43:25.000000000 +0100
++++ stone_soup-0.6.0/source/makefile	2010-04-09 12:21:00.676580838 +0200
+@@ -44,7 +44,7 @@
+ #    ask for a package with convenience libraries instead -- we'll try to provide
+ #    them somewhere in the near future.
  
--INSTALLDIR   := /usr/games/crawl
-+INSTALLDIR   := /usr/bin
+-GAME = crawl
++GAME = stone_soup
  
- # If you're installing Crawl for multiple users, you *must* set this to a
- # valid path before building Crawl. This is not necessary if you are building
- # Crawl for a single user.
+ #
+ # Compiler Flags
+@@ -78,11 +78,11 @@
  
--# SAVEDIR := /usr/games/crawl/saves/
--# DATADIR := /usr/games/crawl/data/
-+SAVEDIR := /var/games/stone_soup/
-+DATADIR := /usr/share/stone_soup/
+ else
  
- LEX  := flex
- YACC := bison -y
-@@ -207,29 +207,22 @@
- ifeq ($(DATADIR),)
- 	$(error DATADIR not set! Set DATADIR and run make clean install again)
- endif
--	[ -d $(INSTALLDIR) ] || mkdir -p $(INSTALLDIR)
--	$(COPY) $(GAME) $(INSTALLDIR)
--	chown $(INSTALL_UGRP) $(INSTALLDIR)/$(GAME)
--	chmod ${MCHMOD} ${INSTALLDIR}/$(GAME)
--	mkdir -p $(DATADIR)/dat
--	mkdir -p $(DATADIR)/dat/lua
--	mkdir -p $(DATADIR)/dat/clua
--	mkdir -p $(DATADIR)/dat/descript
--	mkdir -p $(DATADIR)/dat/database
--	$(COPY) dat/*.des $(DATADIR)/dat
--	$(COPY) dat/lua/*.lua $(DATADIR)/dat/lua
--	$(COPY) dat/clua/*.lua $(DATADIR)/dat/clua
--	$(COPY) dat/descript/*.txt $(DATADIR)/dat/descript
--	$(COPY) dat/database/*.txt $(DATADIR)/dat/database
--	mkdir -p $(DATADIR)/settings
--	$(COPY) ../settings/* $(DATADIR)/settings/
--	mkdir -p $(DATADIR)/docs
--	$(COPY) ../docs/*.txt $(DATADIR)/docs
--	chown -R $(INSTALL_UGRP) $(DATADIR)
-+	[ -d $(DESTDIR)$(INSTALLDIR) ] || mkdir -p $(DESTDIR)$(INSTALLDIR)
-+	$(COPY) $(GAME) $(DESTDIR)$(INSTALLDIR)/stone_soup
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/lua
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/clua
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/descript
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/database
-+	$(COPY) dat/*.des $(DESTDIR)$(DATADIR)/dat
-+	$(COPY) dat/lua/*.lua $(DESTDIR)$(DATADIR)/dat/lua
-+	$(COPY) dat/clua/*.lua $(DESTDIR)$(DATADIR)/dat/clua
-+	$(COPY) dat/descript/*.txt $(DESTDIR)$(DATADIR)/dat/descript
-+	$(COPY) dat/database/*.txt $(DESTDIR)$(DATADIR)/dat/database
-+	mkdir -p $(DESTDIR)$(DATADIR)/settings
-+	$(COPY) ../settings/* $(DESTDIR)$(DATADIR)/settings/
- ifneq ($(SAVEDIR),)
--	mkdir -p $(SAVEDIR)
--	chown $(INSTALL_UGRP) $(SAVEDIR)
--	chmod $(MCHMOD_SAVEDIR) $(SAVEDIR)
-+	mkdir -p $(DESTDIR)$(SAVEDIR)
- endif
+-CFOPTIMIZE := -O2
++CFOPTIMIZE := 
  
- clean:
---- stone_soup-0.5.1-src/source/makefile_tiles.unix~	2009-08-13 16:45:55.000000000 +0200
-+++ stone_soup-0.5.1-src/source/makefile_tiles.unix	2009-08-13 16:51:10.000000000 +0200
-@@ -56,14 +56,14 @@
- # The user:group to install the game as.
- INSTALL_UGRP := games:games
+ endif # USE_ICC
  
--INSTALLDIR   := /usr/games/crawl
-+INSTALLDIR   := /usr/bin
+-CFOTHERS := -fno-strict-aliasing -pipe $(EXTERNAL_FLAGS)
++CFOTHERS := -pipe $(EXTERNAL_FLAGS)
+ CFOTHERS_L := -fsigned-char
+ CFWARN := -Wall
  
- # If you're installing Crawl for multiple users, you *must* set this to a
- # valid path before building Crawl. This is not necessary if you are building
- # Crawl for a single user.
+@@ -659,7 +659,7 @@
  
--# SAVEDIR := /usr/games/crawl/saves/
--# DATADIR := /usr/games/crawl/data/
-+SAVEDIR := /var/games/stone_soup/
-+DATADIR := /usr/share/stone_soup/
+ CFLAGS   := $(CFOPTIMIZE) $(CFOTHERS) $(CFWARN)
+ CFLAGS_L := $(CFOPTIMIZE_L) $(DEFINES_L) $(CFWARN_L) $(INCLUDES_L) $(CFOTHERS_L)
+-ALL_CFLAGS := $(CFLAGS) $(CFLAGS_L)
++ALL_CFLAGS := $(OPTFLAGS) $(CFLAGS) $(CFLAGS_L)
+ YACC_CFLAGS  := $(ALL_CFLAGS) -w -DYYENABLE_NLS=0 -DYYLTYPE_IS_TRIVIAL=0
  
- LEX  := flex
- YACC := bison -y
-@@ -235,31 +235,24 @@
- ifeq ($(DATADIR),)
- 	$(error DATADIR not set! Set DATADIR and run make clean install again)
- endif
--	[ -d $(INSTALLDIR) ] || mkdir -p $(INSTALLDIR)
--	$(COPY) $(GAME) $(INSTALLDIR)
--	chown $(INSTALL_UGRP) $(INSTALLDIR)/$(GAME)
--	chmod ${MCHMOD} ${INSTALLDIR}/$(GAME)
--	mkdir -p $(DATADIR)/dat
--	mkdir -p $(DATADIR)/dat/lua
--	mkdir -p $(DATADIR)/dat/clua
--	mkdir -p $(DATADIR)/dat/descript
--	mkdir -p $(DATADIR)/dat/database
--	$(COPY) dat/*.des $(DATADIR)/dat
--	$(COPY) dat/lua/*.lua $(DATADIR)/dat/lua
--	$(COPY) dat/clua/*.lua $(DATADIR)/dat/clua
--	$(COPY) dat/descript/*.txt $(DATADIR)/dat/descript
--	$(COPY) dat/database/*.txt $(DATADIR)/dat/database
--	mkdir -p $(DATADIR)/settings
--	$(COPY) ../settings/* $(DATADIR)/settings/
--	mkdir -p $(DATADIR)/docs
--	$(COPY) ../docs/*.txt $(DATADIR)/docs
--	mkdir -p $(DATADIR)/dat/tiles
--	$(COPY) dat/tiles/* $(DATADIR)/dat/tiles
--	chown -R $(INSTALL_UGRP) $(DATADIR)
-+	[ -d $(DESTDIR)$(INSTALLDIR) ] || mkdir -p $(DESTDIR)$(INSTALLDIR)
-+	$(COPY) $(GAME) $(DESTDIR)$(INSTALLDIR)/stone_soup
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/lua
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/clua
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/descript
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/database
-+	$(COPY) dat/*.des $(DESTDIR)$(DATADIR)/dat
-+	$(COPY) dat/lua/*.lua $(DESTDIR)$(DATADIR)/dat/lua
-+	$(COPY) dat/clua/*.lua $(DESTDIR)$(DATADIR)/dat/clua
-+	$(COPY) dat/descript/*.txt $(DESTDIR)$(DATADIR)/dat/descript
-+	$(COPY) dat/database/*.txt $(DESTDIR)$(DATADIR)/dat/database
-+	mkdir -p $(DESTDIR)$(DATADIR)/settings
-+	$(COPY) ../settings/* $(DESTDIR)$(DATADIR)/settings/
-+	mkdir -p $(DESTDIR)$(DATADIR)/dat/tiles
-+	$(COPY) dat/tiles/* $(DESTDIR)$(DATADIR)/dat/tiles
- ifneq ($(SAVEDIR),)
--	mkdir -p $(SAVEDIR)
--	chown $(INSTALL_UGRP) $(SAVEDIR)
--	chmod $(MCHMOD_SAVEDIR) $(SAVEDIR)
-+	mkdir -p $(DESTDIR)$(SAVEDIR)
- endif
- 
- clean:
+ UTIL = util/

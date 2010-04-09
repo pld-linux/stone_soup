@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	tiles		# build tiles version
+%bcond_without	tiles		# build tiles version
 #
 Summary:	stone soup :: crawl clone
 Summary(pl.UTF-8):	stone soup :: klon crawla
@@ -13,7 +13,7 @@ Source0:	http://downloads.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
 # Source0-md5:	f4ff3e148344fda6410933d35deb4ead
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
-Patch3:		%{name}-tiles.patch
+Patch2:		%{name}-tiles.patch
 URL:		http://crawl.develz.org/
 %if %{with tiles}
 BuildRequires:	OpenGL-GLU-devel
@@ -53,7 +53,7 @@ Crawla.
 %patch0 -p1
 %patch1 -p1
 %if %{with tiles}
-#%%patch3 -p1
+%patch2 -p1
 %endif
 
 %build

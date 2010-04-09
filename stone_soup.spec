@@ -14,7 +14,6 @@ Source0:	http://downloads.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-systemsqlite3.patch
-Patch3:		%{name}-cflags.patch
 Patch4:		%{name}-tiles.patch
 URL:		http://crawl.develz.org/
 %if %{with tiles}
@@ -55,7 +54,6 @@ Crawla.
 #%%patch0 -p1
 %patch1 -p1
 #%%patch2 -p1
-#%%patch3 -p1
 %if %{with tiles}
 #%%patch4 -p1
 %endif

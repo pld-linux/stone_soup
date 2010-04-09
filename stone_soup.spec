@@ -27,7 +27,7 @@ BuildRequires:	flex
 %{?with_tiles:BuildRequires:	freetype-devel}
 %{?with_tiles:BuildRequires:	libpng-devel}
 BuildRequires:	lua51-devel
-%{!?with_tiles:BuildRequires:	ncurses-devel}
+BuildRequires:	ncurses-devel
 BuildRequires:	sqlite3-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,7 +51,7 @@ Crawla.
 
 %prep
 %setup -q
-#%%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 #%%patch2 -p1
 %if %{with tiles}

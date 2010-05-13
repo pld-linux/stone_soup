@@ -21,13 +21,15 @@ BuildRequires:	OpenGL-devel
 %endif
 %{?with_tiles:BuildRequires:	SDL_image-devel}
 BuildRequires:	bison
-BuildRequires:	byacc
 BuildRequires:	flex
 %{?with_tiles:BuildRequires:	freetype-devel}
 %{?with_tiles:BuildRequires:	libpng-devel}
 BuildRequires:	lua51-devel
 BuildRequires:	ncurses-devel
+BuildRequires:	perl-base
+BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
+BuildRequires:	which
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

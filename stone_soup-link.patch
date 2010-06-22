@@ -1,0 +1,11 @@
+--- stone_soup-0.6.1/source/makefile~   2010-06-22 11:01:49.307027321 +0200
++++ stone_soup-0.6.1/source/makefile    2010-06-22 11:11:56.466971622 +0200
+@@ -633,7 +633,7 @@
+ endif
+
+ ifndef TILES
+-LIBS += -L$(NC_PREFIX)/lib -l$(NC_LIB)
++LIBS += -L$(NC_PREFIX)/lib -l$(NC_LIB) -ltinfow
+ endif
+
+ endif

@@ -1,19 +1,20 @@
 #
 # Conditional build:
-%bcond_without	tiles		# build tiles version
+%bcond_without	tiles		# build non-tiles version
 #
 Summary:	stone soup :: crawl clone
 Summary(pl.UTF-8):	stone soup :: klon crawla
 Name:		stone_soup
-Version:	0.6.0
+Version:	0.6.1
 Release:	1
 License:	Nethack Like
 Group:		X11/Applications/Games
 Source0:	http://downloads.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
-# Source0-md5:	f4ff3e148344fda6410933d35deb4ead
+# Source0-md5:	b8b8b53c335fc0c03b1ddfc205fd9183
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-tiles.patch
+Patch3:		%{name}-link.patch
 URL:		http://crawl.develz.org/
 %if %{with tiles}
 BuildRequires:	OpenGL-GLU-devel
@@ -56,6 +57,9 @@ Crawla.
 %patch1 -p1
 %if %{with tiles}
 %patch2 -p1
+%endif
+%if %{without tiles}
+%patch3 -p1
 %endif
 
 %build

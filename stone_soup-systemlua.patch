@@ -1,15 +1,13 @@
---- stone_soup-0.6.0/source/makefile~	2010-04-09 13:32:53.939477805 +0200
-+++ stone_soup-0.6.0/source/makefile	2010-04-09 13:33:39.472831138 +0200
-@@ -387,9 +385,9 @@
+--- stone_soup-0.7.0/source/makefile~	2010-07-24 05:31:49.000000000 +0200
++++ stone_soup-0.7.0/source/makefile	2010-07-24 14:15:22.987589375 +0200
+@@ -135,8 +135,8 @@
  endif
+ LIBZ := contrib/install/lib/libz.a
  
- ifndef BUILD_LUA
--  ifneq (,$(wildcard /usr/include/lua5.1))
--    INCLUDES_L += -I/usr/include/lua5.1
--    LIBS += -llua5.1
-+  ifneq (,$(wildcard /usr/include/lua51))
-+    INCLUDES_L += -I/usr/include/lua51
-+    LIBS += -llua51
-   else
-     ifneq (,$(wildcard /usr/include/lua.h))
-       LIBS += -llua
+-LUA_INCLUDE_DIR := /usr/include/lua5.1
+-LUA_LIB := -llua5.1
++LUA_INCLUDE_DIR := /usr/include/lua51
++LUA_LIB := -llua51
+ SQLITE_INCLUDE_DIR := /usr/include
+ SQLITE_LIB := -lsqlite3
+ 

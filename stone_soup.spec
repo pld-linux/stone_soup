@@ -22,6 +22,7 @@ BuildRequires:	OpenGL-devel
 %endif
 %{?with_tiles:BuildRequires:	SDL_image-devel}
 BuildRequires:	bison
+BuildRequires:	cal3d-devel
 BuildRequires:	flex
 %{?with_tiles:BuildRequires:	freetype-devel}
 %{?with_tiles:BuildRequires:	libpng-devel}

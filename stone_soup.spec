@@ -6,11 +6,12 @@ Summary:	stone soup :: crawl clone
 Summary(pl.UTF-8):	stone soup :: klon crawla
 Name:		stone_soup
 Version:	0.7.1
-Release:	1
+Release:	2
 License:	Nethack Like
 Group:		X11/Applications/Games
 Source0:	http://downloads.sourceforge.net/crawl-ref/%{name}-%{version}.tar.bz2
 # Source0-md5:	e95e538264bbcf6db64cec920d669542
+Source1:	%{name}.desktop
 Patch0:		%{name}-systemlua.patch
 Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-tiles.patch
@@ -58,8 +59,7 @@ Crawla.
 %patch1 -p1
 %if %{with tiles}
 %patch2 -p1
-%endif
-%if %{without tiles}
+%else
 %patch3 -p1
 %endif
 
@@ -76,6 +76,7 @@ Crawla.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} -C source install \
 	prefix="%{_prefix}" \
@@ -86,12 +87,17 @@ rm -rf $RPM_BUILD_ROOT
 	V="y" \
 	DESTDIR=$RPM_BUILD_ROOT
 
+cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -a source/dat/tiles/stone_soup_icon-32x32.png $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.png
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %doc CREDITS.txt README.* docs
-%attr(2755,root,games) %{_bindir}/stone_soup
-%{_datadir}/stone_soup
-%attr(775,root,games) %dir /var/games/stone_soup
+%attr(2755,root,games) %{_bindir}/%{name}
+%{_datadir}/%{name}
+%attr(775,root,games) %dir /var/games/%{name}
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/%{name}.png

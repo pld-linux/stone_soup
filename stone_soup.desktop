@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Dungeon Crawl Stone Soup
+Comment=stone soup :: crawl clone
+Comment[pl]=stone soup :: klon crawla
+Icon=stone_soup
+Exec=stone_soup
+Terminal=false
+Type=Application
+Categories=Game;RolePlaying;
+# vi: encoding=utf-8

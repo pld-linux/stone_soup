@@ -1,6 +1,6 @@
---- stone_soup-0.7.0/source/makefile~	2010-07-24 14:16:48.204232436 +0200
-+++ stone_soup-0.7.0/source/makefile	2010-07-24 14:19:27.494635214 +0200
-@@ -45,7 +45,7 @@
+--- stone_soup-0.8.0/source/makefile~	2011-04-27 12:30:06.076666711 +0200
++++ stone_soup-0.8.0/source/makefile	2011-04-27 12:31:42.776666712 +0200
+@@ -51,7 +51,7 @@
  #    ask for a package with convenience libraries instead -- we'll try to provide
  #    them somewhere in the near future.
  
@@ -9,21 +9,21 @@
  
  ASSERTS = yes
  
-@@ -86,7 +86,7 @@
+@@ -88,7 +88,7 @@
+ #CFOPTIMIZE_L := -ipo
+ 
+ # Some very good optimization flags.
+-CFOPTIMIZE := -O2 -parallel
++CFOPTIMIZE :=
  
  else
  
--CFOPTIMIZE := -O2
-+CFOPTIMIZE :=
- 
- endif # USE_ICC
- 
-@@ -727,7 +727,7 @@
+@@ -763,7 +763,7 @@
  
  CFLAGS   := $(CFOPTIMIZE) $(CFOTHERS) $(CFWARN)
  CFLAGS_L := $(CFOPTIMIZE_L) $(DEFINES_L) $(CFWARN_L) $(INCLUDES_L) $(CFOTHERS_L)
 -ALL_CFLAGS := $(CFLAGS) $(CFLAGS_L)
 +ALL_CFLAGS := $(OPTFLAGS) $(CFLAGS) $(CFLAGS_L)
- YACC_CFLAGS  := $(ALL_CFLAGS) -w -DYYENABLE_NLS=0 -DYYLTYPE_IS_TRIVIAL=0
+ YACC_CFLAGS  := $(ALL_CFLAGS) -Wno-unused-function -Wno-sign-compare -DYYENABLE_NLS=0 -DYYLTYPE_IS_TRIVIAL=0
  
  UTIL = util/
